@@ -61,7 +61,7 @@ def unique_values(table, field):
 
 	"""
 	returns list of unique values in a given field, in a table. Returned is a
-	tuple that is ready for a arcpy SQL statement
+	string of a SQL tuple that is ready for a arcpy SQL statement
 	"""
 	with arcpy.da.SearchCursor(table, [field]) as cursor:
 		uniq_vals = sorted({row[0] for row in cursor})
