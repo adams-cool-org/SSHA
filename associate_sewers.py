@@ -14,7 +14,7 @@ def associate_sewers_to_area(project_id, from_sewers, study_sewers, study_areas)
 	"""
     Copy sewers from the Waste Water Network and append to the StudiedSewers
     layer. Sewers are copied based on spatial join to the drainage areas of
-    each study area within a given project scope (Project Number).
+    each study area within a given project scope (Project #).
     """
 
     #uniqs = str(tuple(unique_values(study_sewers, "StudyArea_ID"))).replace("u", "")
