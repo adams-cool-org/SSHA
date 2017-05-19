@@ -5,46 +5,28 @@ import HHCalculations
 import utils
 import os
 
-
-def trace_upstream(startid, table=r"Small_Sewer_Drainage_Areas",
-					return_field = 'StudyArea_ID',
-					downstream_field='DownStreamStudyAreaID',
-					search_field = 'StudyArea_ID'):
+def write_peak_flows_to_sewers(study_areas, study_sewers):
 	"""
-	return a list of study areas ids that cumulatively drain into the
-	given study area. This functions requires that study areas have a downstream
-	study area assigned where appropriate.
-
-	if the upstream lookup field is different than the return field, set this in
-	upstream_field. Otherwise this should be None
-
-	not currently working except for default case
-
-	#RECURSIVE_FUNCTION
+	write the peak runoff stored in the study areas layer to each studied sewer
 	"""
 
-	upstream_ids = []
-	def find_upstream_elements(current_id):
-		#search for elements having the current element's ID as their
-		#downstream ID. E.g. DownStreamStudyAreaID = '90001_08'
-		where = "{} = '{}'".format(downstream_field, current_id)
-		print where
-		upstream_cursor = arcpy.SearchCursor(table, where_clause=where)
+	fields = ['Project_ID', 'StudyArea_ID', 'Peak_Runoff']
+	with arcpy.da.SearchCursor(study_areas, fields) as areas_cursor:
+		for area in areas_cursor:
+			project_id = area[0]
+			study_area_id = area[1]
+			peak_runoff = area[2]
+			# arcpy.AddMessage('{} - {} peak runoff = {}'.format(project_id, study_area_id, peak_runoff))
+			print '{} - {} peak runoff = {}'.format(project_id, study_area_id, peak_runoff)
+			#update the peakflow in the study sewer
+			ss_fields = ['Peak_Runoff']
+			where = "Project_ID = {} AND StudyArea_ID = '{}' AND StudySewer = 'Y'".format(project_id, study_area_id)
+			with arcpy.da.UpdateCursor(study_sewers, ss_fields, where_clause=where) as cursor:
+				for sewer in cursor:
+					sewer[0] = peak_runoff
 
-		for row in upstream_cursor:
+					cursor.updateRow(sewer)
 
-			#upstream_id = row.getValue(return_field)
-			print row.getValue(return_field)
-			upstream_ids.append(row.getValue(return_field))
-
-			#find_upstream_elements(upstream_id)
-			find_upstream_elements(row.getValue(search_field))
-
-
-	#kick it off
-	find_upstream_elements(startid)
-
-	return upstream_ids
 
 def updateDAIndex (project_id, study_areas, study_area_indices):
 

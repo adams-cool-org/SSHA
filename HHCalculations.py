@@ -261,6 +261,13 @@ def run_hydrology(project_id, study_sewers, study_areas, study_area_id=None):
 		I = 116 / ( tc + 17)
 		peak_runoff =  C * I * A
 
+		#update the peakflow in the study sewer
+		where = "Project_ID = {} AND StudyArea_ID = '{}' AND StudySewer = 'Y'".format(project_id, study_area_id)
+		with arcpy.da.UpdateCursor(study_sewers, ['Peak_Runoff'], where_clause=where) as cursor:
+			for sewer in cursor:
+				sewer[0] = peak_runoff
+				cursor.updateRow(sewer)
+
 		#replacement pipe characteristics
 		#replacementCapacity = max(peak_runoff, limitingPipe['capacity']) #capacity provided in new pipe should match existing Q or runoff Q (never decrease capacity)
 		replacementCapacity = peak_runoff #replacement pipe capacity can be decreased from existing
@@ -291,7 +298,7 @@ def run_hydrology(project_id, study_sewers, study_areas, study_area_id=None):
 def run_hydraulics(project_id, study_sewers, study_area_id=None):
 
 	where = utils.where_clause_from_user_input(project_id, study_area_id)
-	arcpy.AddMessage("wherey = {}".format(where))
+	arcpy.AddMessage("where = {}".format(where))
 	study_sewers_cursor = arcpy.UpdateCursor(study_sewers, where_clause = where)
 
 	for sewer in study_sewers_cursor:
