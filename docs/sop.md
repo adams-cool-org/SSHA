@@ -23,14 +23,13 @@ at this server location:
 
 #### Relevant Files
 | Filename                | Description |
-|:- |:- |
+| --- | --- |
 | Small Sewer Capacity.mxd     | ArcMap file  |
 | Small_Sewer_Capacity.gdb     | Geodatabase containing data results of small sewer analysis |  
 | Mannings Slope Calcs.xlsm    | Excel file for slope verification |
 
 ## 1. Delineate Drainage Areas
 1. Navigate to the study area based on the street connection point provided.
-    1. Optional: use the Find tool to zoom to street intersections.
 2. Identify the study sewer and the branches that contribute to it (if any).
     1. Ensure the study sewer is within the size limit for the SSHA process. This tool is designed to be used on conduits that are no larger than 36&quot; diameter or equivalent size.
     2. The Trace Upstream tool may be used to identify contributing branches. To use this, ensure the Utility Network Analyst tool is added to the toolbar and set on the &quot;Data Conversion Waste Water Network&quot; or &quot;Data Conversion Storm Water Network&quot;, depending on the network being analyzed.
@@ -57,12 +56,12 @@ at this server location:
 8. In the Editor Toolbar dropdown menu, select &quot;Save Edits&quot;, then &quot;Stop Editing&quot;.
 
 ## 2. Associate Sewers to Drainage Areas
-Add the study sewers (and their contributing sewers) from the &quot;Waste Water Gravity Mains&quot; layer to the &quot;Studied Sewers&quot; Layer**
+Add the study sewers (and their contributing sewers) from the &quot;Waste Water Gravity Mains&quot; layer to the &quot;Studied Sewers&quot; Layer
 1. Associate study sewers to the Drainage Areas.
     1. Navigate to the Small\_Sewer\_Calcs Toolbox within the ArcToolbox.
     2. Select the &quot;Associate Sewers to DAs&quot; tool.
     3. Input the command prompt options:
-        1. Project ID – Project\_ID from the &quot;Drainage Areas&quot; attribute table**
+        1. Project ID – Project\_ID from the &quot;Drainage Areas&quot; attribute table
         2. From Sewers Layer – &quot;Waste Water Gravity Mains&quot; or &quot;Storm Water Gravity Mains&quot;
         3. Study Sewers Layer – &quot;StudiedSewers&quot;
         4. Drainage Area Layer – &quot;Drainage Areas&quot;
