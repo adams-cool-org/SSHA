@@ -1,6 +1,6 @@
 <style type="text/css">
-    ol ol { list-style-type: lower-alpha; }
-    ol ol ol { list-style-type: lower-roman;}
+    ol ol { list-style-type: lower-roman; }
+    ol ol ol { list-style-type: lower-alpha;}
     ol {margin: 0em 0;}
 </style>
 # Small Sewer Hydraulic Analysis
@@ -37,46 +37,46 @@ at this server location:
         2. Block ends should be cut at the parcel vertices on either side of the street.
         3. Drainage areas should be cut at approximate 45 degree angles from terminal block parcel vertices and extended until approximately the block midpoint. A sample drafted drainage area is provided below for reference.
         
-        As a rule of thumb, drainage area boundaries should evenly split the space between the sewers. For example, a drainage boundary between sewers that are oriented with a 60 degree angle between them should bisect the sewers at 30 degrees from each sewer. Surface features and parcel boundaries should not influence the drainage area delineation.
+        > As a rule of thumb, drainage area boundaries should evenly split the space between the sewers. For example, a drainage boundary between sewers that are oriented with a 60 degree angle between them should bisect the sewers at 30 degrees from each sewer. Surface features and parcel boundaries should not influence the drainage area delineation.
         
     5. Compare your drafted drainage area to the &quot;NewSubSheds&quot; layer as secondary measure to ensure that vital portions of the drainage area are not missed.
     6. Open the &quot;Drainage Areas&quot; attribute table and manually enter the Project\_ID, StudyArea\_ID and ConnectionPoint attributes for the new drainage area. For example, data entered for two drainage areas with a Project\_ID (or work order number) of 40000 should look like this:
 
-| Project\_ID | StudyArea\_ID | ConnectionPoint |
-| --- | --- | --- |
-| 40000 | 40000\_01 | 11 St from Market to Filbert |
-| 40000 | 40000\_02 | 11 St from Filbert to Arch |
+        | Project\_ID | StudyArea\_ID | ConnectionPoint |
+        | --- | --- | --- |
+        | 40000 | 40000\_01 | 11 St from Market to Filbert |
+        | 40000 | 40000\_02 | 11 St from Filbert to Arch |
 
     7. Repeat steps &quot;a&quot; through &quot;f&quot; for each study area.
     8. In the Editor Toolbar dropdown menu, select &quot;Save Edits&quot;, then &quot;Stop Editing&quot;.
 
-1. **Add the study sewers (and their contributing sewers) from the &quot;Waste Water Gravity Mains&quot; layer to the &quot;Studied Sewers&quot; Layer**
-  1. **Associate study sewers to the Drainage Areas.**
-    1. **Navigate to the Small\_Sewer\_Calcs Toolbox within the ArcToolbox.**
-    2. **Select the &quot;Associate Sewers to DAs&quot; tool.**
-    3. **Input the command prompt options:**
-      1. **Project ID – Project\_ID from the &quot;Drainage Areas&quot; attribute table**
-      2. **From Sewers Layer – &quot;Waste Water Gravity Mains&quot; or &quot;Storm Water Gravity Mains&quot;**
-      3. **Study Sewers Layer – &quot;StudiedSewers&quot;**
-      4. **Drainage Area Layer – &quot;Drainage Areas&quot;**
-    4. **Select &quot;OK&quot;. The tool will populate the StudiedSewers layer with the sewers intersecting the target drainage area.**
-  2. **Identify the Study Sewer and** Time of Concentration (TC) path for each study area.
-    1. **Right-click the &quot;StudiedSewers&quot; layer. Select &quot;Edit Features&quot;, then &quot;Start Editing&quot;.**
-    2. Open the &quot;StudiedSewers&quot; attribute table.
-    3. Select each of the pipe segments that are part of the study sewer. Change the &quot;StudySewer&quot; field to &quot;Y&quot; for each of these segments. Study sewers should follow the following conventions:
-      1. Not exceed the length of one typical city block (approximately 450 feet). Where sewer length exceeds approximately 450 feet within a city block, split the study area near the block midpoint. If possible, make the division at manholes.
-      2. Not extend across a change in sewer size or slope
-      3. Not extend beyond a junction of two or more sewers
-    4. Identify the TC path for the drainage area.
-      1. This can be completed by identifying the longest pipe reach within the drainage area with the Measure tool.
-      2. Select each of the pipe segments making up the TC path. Change the &quot;TC\_Path&quot; field to &quot;Y&quot; for each of these segments.
-    5. Repeat steps &quot;iii&quot; and &quot;iv&quot; for each study area.
-  3. In the Editor Toolbar dropdown menu, select &quot;Save Edits&quot;, then &quot;Stop Editing&quot;.
+2. **Add the study sewers (and their contributing sewers) from the &quot;Waste Water Gravity Mains&quot; layer to the &quot;Studied Sewers&quot; Layer**
+    1. Associate study sewers to the Drainage Areas.
+        1. Navigate to the Small\_Sewer\_Calcs Toolbox within the ArcToolbox.
+        2. Select the &quot;Associate Sewers to DAs&quot; tool.
+        3. Input the command prompt options:
+            1. Project ID – Project\_ID from the &quot;Drainage Areas&quot; attribute table**
+            2. From Sewers Layer – &quot;Waste Water Gravity Mains&quot; or &quot;Storm Water Gravity Mains&quot;
+            3. Study Sewers Layer – &quot;StudiedSewers&quot;
+            4. Drainage Area Layer – &quot;Drainage Areas&quot;
+        4. Select &quot;OK&quot;. The tool will populate the StudiedSewers layer with the sewers intersecting the target drainage area.
+    2. Identify the Study Sewer and Time of Concentration (TC) path for each study area.
+        1. Right-click the &quot;StudiedSewers&quot; layer. Select &quot;Edit Features&quot;, then &quot;Start Editing&quot;.
+        2. Open the &quot;StudiedSewers&quot; attribute table.
+        3. Select each of the pipe segments that are part of the study sewer. Change the &quot;StudySewer&quot; field to &quot;Y&quot; for each of these segments. Study sewers should follow the following conventions:
+            * Not exceed the length of one typical city block (approximately 450 feet). Where sewer length exceeds approximately 450 feet within a city block, split the study area near the block midpoint. If possible, make the division at manholes.
+            * Not extend across a change in sewer size or slope
+            * Not extend beyond a junction of two or more sewers
+        4. Identify the TC path for the drainage area.
+            * This can be completed by identifying the longest pipe reach within the drainage area with the Measure tool.
+            * Select each of the pipe segments making up the TC path. Change the &quot;TC\_Path&quot; field to &quot;Y&quot; for each of these segments.
+        5. Repeat steps &quot;iii&quot; and &quot;iv&quot; for each study area.
+    3. In the Editor Toolbar dropdown menu, select &quot;Save Edits&quot;, then &quot;Stop Editing&quot;.
 
-1. **Perform Hydraulic and Hydrologic Calculations**
-  1. **Navigate to the Small\_Sewer\_Calcs Toolbox within the ArcToolbox**
-  2. **Select the &quot;Run H&amp;H Calcs&quot; tool**
-    1. **Input the command prompt options. Enter the Study Area ID to perform calculations for one study sewer or enter the Project ID to perform batch calculations on the entire project.**
+3. **Perform Hydraulic and Hydrologic Calculations**
+    1. Navigate to the Small\_Sewer\_Calcs Toolbox within the ArcToolbox
+    2. Select the &quot;Run H&amp;H Calcs&quot; tool
+    3. Input the command prompt options. Enter the Study Area ID to perform calculations for one study sewer or enter the Project ID to perform batch calculations on the entire project.
 
 1. **Resolve data gaps for slope values**
   1. **The &quot;Run H&amp;H Calcs&quot; will tag sewers that have missing or &quot;&lt;Null&gt;&quot; slope values. To continue with the hydraulic calculations, a minimum slope of 0.01% is assumed. Review the drawings for these sewers and determine whether these slope values can be resolved.**
