@@ -1,66 +1,45 @@
+<style type="text/css">
+    ol ol { list-style-type: lower-alpha; }
+    ol ol ol { list-style-type: lower-roman;}
+    ol {margin: 0em 0;}
+</style>
 # Small Sewer Hydraulic Analysis
 ## Standard Operating Procedure
 
 Updated May 22, 2017
 
-Th is SOP is intended to guide the completion of small sewer hydraulic analyses(SSHA) to 
-determine the hydraulic capacity and peak design runoff from contributing drainage areas for 
-small sewers. This procedure makes us of GIS script tools applied within an ArcGIS basemap 
-and geodatabase on the LAMP drive:
+This SOP is intended to guide the completion of small sewer hydraulic analyses
+(SSHA) to determine the hydraulic capacity and peak design runoff from
+contributing drainage areas for small sewers. This procedure makes us of GIS
+script tools applied within an ArcGIS basemap and geodatabase on the LAMP drive
+at this server location:
+> \\\PWDHQR\Data\Planning &amp; Research\Linear Asset Management Program\Water Sewer Projects Initiated\03 GIS Data\Hydraulic Studies
 
-<dl>
-  <dt>Basemap:</dt>
-  <dd>\\PWDHQR\Data\Planning &amp; Research\Linear Asset Management Program\Water Sewer Projects Initiated\03 GIS Data\Hydraulic Studies\Small Sewer Capacity.mxd</dd>
-
-  <dt>Markdown in HTML</dt>
-  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
-</dl>
-
+#### Relevant Files
+| Filename                | Description |
+|:-------------           |:------------- |
+| Small Sewer Capacity.mxd     | ArcMap file  |
+| Small_Sewer_Capacity.gdb     | Geodatabase containing data results of small sewer analysis |  
+| Mannings Slope Calcs.xlsm    | Excel file for slope verification |
 
 
-
-Geodatabase:
-
-[\\PWDHQR\Data\Planning &amp; Research\Linear Asset Management Program\Water Sewer Projects Initiated\03 GIS Data\Hydraulic Studies\Small\_Sewer\_Capacity.gdb](./../../%5C%5CPWDHQR%5CData%5CPlanning%20&amp;%20Research%5CLinear%20Asset%20Management%20Program%5CWater%20Sewer%20Projects%20Initiated%5C03%20GIS%20Data%5CHydraulic%20Studies%5CSmall_Sewer_Capacity.gdb)
-
-Scripts:
-
-[\\PWDHQR\Data\Planning &amp; Research\Linear Asset Management Program\Water Sewer Projects Initiated\03 GIS Data\Hydraulic Studies\Scripts](./../../%5C%5CPWDHQR%5CData%5CPlanning%20&amp;%20Research%5CLinear%20Asset%20Management%20Program%5CWater%20Sewer%20Projects%20Initiated%5C03%20GIS%20Data%5CHydraulic%20Studies%5CScripts)
-
-       Project Folders:
-
-[\\PWDHQR\Data\Planning &amp; Research\Linear Asset Management Program\Water Sewer Projects Initiated\05      Projects](./../../%5C%5Cpwdhqr%5CData%5CPlanning%20&amp;%20Research%5CLinear%20Asset%20Management%20Program%5CWater%20Sewer%20Projects%20Initiated%5C05%20%20%20%20%20%20Projects)
-
-       Slope Value Verification Tool:
-
-[\\PWDHQR\Data\Planning &amp; Research\Linear Asset Management Program\Water Sewer Projects Initiated\03 GIS Data\Hydraulic Studies\ResourcesSmall%20Sewer%20Hydraulic%20Analysis%20SOP.docx](./../../%5C%5CPWDHQR%5CData%5CPlanning%20&amp;%20Research%5CLinear%20Asset%20Management%20Program%5CWater%20Sewer%20Projects%20Initiated%5C03%20GIS%20Data%5CHydraulic%20Studies%5CResourcesSmall%2520Sewer%2520Hydraulic%2520Analysis%2520SOP.docx)
-
-1. *Delineate drainage areas contributing to each study sewer*
+1. **Delineate drainage areas contributing to each study sewer**
   1. Navigate to the study area based on the street connection point provided.
     1. Optional: use the Find tool to zoom to street intersections.
-
-1.
-  1. Identify the study sewer and the branches that contribute to it (if any).
+  2. Identify the study sewer and the branches that contribute to it (if any).
     1. Ensure the study sewer is within the size limit for the SSHA process. This tool is designed to be used on conduits that are no larger than 36&quot; diameter or equivalent size.
     2. The Trace Upstream tool may be used to identify contributing branches. To use this, ensure the Utility Network Analyst tool is added to the toolbar and set on the &quot;Data Conversion Waste Water Network&quot; or &quot;Data Conversion Storm Water Network&quot;, depending on the network being analyzed.
-
-
-
-1.
-  1.
-    1. Confirm that Vent Pipes are disable from this analysis (these tend to erroneously extend the upstream trace). To do this, right-click the &quot;Analysis&quot; drop down menu, &quot;Disable Layers&quot; and check &quot;Storm Water Vent Pipes&quot; or &quot;Waste Water Vent Pipes&quot;.
-    2. Place an Edge Flag Tool near the downstream end of the study pipe, select &quot;Trace Upstream&quot;, and click the &quot;Solve&quot; button. The contributing branches will be highlighted in red. Review the identified upstream pipes and check for errors.
-  2. The contributing drainage area should encompass all of the contributing branches. To delineate the new drainage area, first right click the &quot;Drainage Areas&quot; layer and select &quot;Edit Features&quot;&gt;&quot;Start Editing&quot;. Then, click on &quot;Create Features&quot; in the Editor Toolbar and select the &quot;Drainage Areas&quot; layer.
-  3. Draft the new drainage area based on the following rules of thumb:
+    3. Confirm that Vent Pipes are disable from this analysis (these tend to erroneously extend the upstream trace). To do this, right-click the &quot;Analysis&quot; drop down menu, &quot;Disable Layers&quot; and check &quot;Storm Water Vent Pipes&quot; or &quot;Waste Water Vent Pipes&quot;.
+    4. Place an Edge Flag Tool near the downstream end of the study pipe, select &quot;Trace Upstream&quot;, and click the &quot;Solve&quot; button. The contributing branches will be highlighted in red. Review the identified upstream pipes and check for errors.
+  3. The contributing drainage area should encompass all of the contributing branches. To delineate the new drainage area, first right click the &quot;Drainage Areas&quot; layer and select &quot;Edit Features&quot;&gt;&quot;Start Editing&quot;. Then, click on &quot;Create Features&quot; in the Editor Toolbar and select the &quot;Drainage Areas&quot; layer.
+  4. Draft the new drainage area based on the following rules of thumb:
     1. Blocks that are adjacent to contributing pipe reaches at the edge of the drainage area should be bisected.
     2. Block ends should be cut at the parcel vertices on either side of the street.
     3. Drainage areas should be cut at approximate 45 degree angles from terminal block parcel vertices and extended until approximately the block midpoint. A sample drafted drainage area is provided below for reference.
 
-As a rule of thumb, drainage area boundaries should evenly split the space between the sewers. For example, a drainage boundary between sewers that are oriented with a 60 degree angle between them should bisect the sewers at 30 degrees from each sewer. Surface features and parcel boundaries should not influence the drainage area delineation.
-
-1.
-  1. Compare your drafted drainage area to the &quot;NewSubSheds&quot; layer as secondary measure to ensure that vital portions of the drainage area are not missed.
-  2. Open the &quot;Drainage Areas&quot; attribute table and manually enter the Project\_ID, StudyArea\_ID and ConnectionPoint attributes for the new drainage area. For example, data entered for two drainage areas with a Project\_ID (or work order number) of 40000 should look like this:
+    As a rule of thumb, drainage area boundaries should evenly split the space between the sewers. For example, a drainage boundary between sewers that are oriented with a 60 degree angle between them should bisect the sewers at 30 degrees from each sewer. Surface features and parcel boundaries should not influence the drainage area delineation.
+  5. Compare your drafted drainage area to the &quot;NewSubSheds&quot; layer as secondary measure to ensure that vital portions of the drainage area are not missed.
+  6. Open the &quot;Drainage Areas&quot; attribute table and manually enter the Project\_ID, StudyArea\_ID and ConnectionPoint attributes for the new drainage area. For example, data entered for two drainage areas with a Project\_ID (or work order number) of 40000 should look like this:
 
 | Project\_ID | StudyArea\_ID | ConnectionPoint |
 | --- | --- | --- |
