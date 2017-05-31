@@ -1,6 +1,6 @@
 ---
-layout: default
-title: {{ site.name }} Coolio
+layout: post
+title: A neat post
 ---
 
 
