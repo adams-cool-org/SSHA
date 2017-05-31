@@ -24,35 +24,31 @@ at this server location:
 
 
 1. **Delineate drainage areas contributing to each study sewer**
-  1. Navigate to the study area based on the street connection point provided.
-    1. Optional: use the Find tool to zoom to street intersections.
-  2. Identify the study sewer and the branches that contribute to it (if any).
-    1. Ensure the study sewer is within the size limit for the SSHA process. This tool is designed to be used on conduits that are no larger than 36&quot; diameter or equivalent size.
-    2. The Trace Upstream tool may be used to identify contributing branches. To use this, ensure the Utility Network Analyst tool is added to the toolbar and set on the &quot;Data Conversion Waste Water Network&quot; or &quot;Data Conversion Storm Water Network&quot;, depending on the network being analyzed.
-    3. Confirm that Vent Pipes are disable from this analysis (these tend to erroneously extend the upstream trace). To do this, right-click the &quot;Analysis&quot; drop down menu, &quot;Disable Layers&quot; and check &quot;Storm Water Vent Pipes&quot; or &quot;Waste Water Vent Pipes&quot;.
-    4. Place an Edge Flag Tool near the downstream end of the study pipe, select &quot;Trace Upstream&quot;, and click the &quot;Solve&quot; button. The contributing branches will be highlighted in red. Review the identified upstream pipes and check for errors.
-  3. The contributing drainage area should encompass all of the contributing branches. To delineate the new drainage area, first right click the &quot;Drainage Areas&quot; layer and select &quot;Edit Features&quot;&gt;&quot;Start Editing&quot;. Then, click on &quot;Create Features&quot; in the Editor Toolbar and select the &quot;Drainage Areas&quot; layer.
-  4. Draft the new drainage area based on the following rules of thumb:
-    1. Blocks that are adjacent to contributing pipe reaches at the edge of the drainage area should be bisected.
-    2. Block ends should be cut at the parcel vertices on either side of the street.
-    3. Drainage areas should be cut at approximate 45 degree angles from terminal block parcel vertices and extended until approximately the block midpoint. A sample drafted drainage area is provided below for reference.
-
-    As a rule of thumb, drainage area boundaries should evenly split the space between the sewers. For example, a drainage boundary between sewers that are oriented with a 60 degree angle between them should bisect the sewers at 30 degrees from each sewer. Surface features and parcel boundaries should not influence the drainage area delineation.
-  5. Compare your drafted drainage area to the &quot;NewSubSheds&quot; layer as secondary measure to ensure that vital portions of the drainage area are not missed.
-  6. Open the &quot;Drainage Areas&quot; attribute table and manually enter the Project\_ID, StudyArea\_ID and ConnectionPoint attributes for the new drainage area. For example, data entered for two drainage areas with a Project\_ID (or work order number) of 40000 should look like this:
+    1. Navigate to the study area based on the street connection point provided.
+        1. Optional: use the Find tool to zoom to street intersections.
+    2. Identify the study sewer and the branches that contribute to it (if any).
+        1. Ensure the study sewer is within the size limit for the SSHA process. This tool is designed to be used on conduits that are no larger than 36&quot; diameter or equivalent size.
+        2. The Trace Upstream tool may be used to identify contributing branches. To use this, ensure the Utility Network Analyst tool is added to the toolbar and set on the &quot;Data Conversion Waste Water Network&quot; or &quot;Data Conversion Storm Water Network&quot;, depending on the network being analyzed.
+        3. Confirm that Vent Pipes are disable from this analysis (these tend to erroneously extend the upstream trace). To do this, right-click the &quot;Analysis&quot; drop down menu, &quot;Disable Layers&quot; and check &quot;Storm Water Vent Pipes&quot; or &quot;Waste Water Vent Pipes&quot;.
+        4. Place an Edge Flag Tool near the downstream end of the study pipe, select &quot;Trace Upstream&quot;, and click the &quot;Solve&quot; button. The contributing branches will be highlighted in red. Review the identified upstream pipes and check for errors.
+    3. The contributing drainage area should encompass all of the contributing branches. To delineate the new drainage area, first right click the &quot;Drainage Areas&quot; layer and select &quot;Edit Features&quot;&gt;&quot;Start Editing&quot;. Then, click on &quot;Create Features&quot; in the Editor Toolbar and select the &quot;Drainage Areas&quot; layer.
+    4. Draft the new drainage area based on the following rules of thumb:
+        1. Blocks that are adjacent to contributing pipe reaches at the edge of the drainage area should be bisected.
+        2. Block ends should be cut at the parcel vertices on either side of the street.
+        3. Drainage areas should be cut at approximate 45 degree angles from terminal block parcel vertices and extended until approximately the block midpoint. A sample drafted drainage area is provided below for reference.
+        
+        As a rule of thumb, drainage area boundaries should evenly split the space between the sewers. For example, a drainage boundary between sewers that are oriented with a 60 degree angle between them should bisect the sewers at 30 degrees from each sewer. Surface features and parcel boundaries should not influence the drainage area delineation.
+        
+    5. Compare your drafted drainage area to the &quot;NewSubSheds&quot; layer as secondary measure to ensure that vital portions of the drainage area are not missed.
+    6. Open the &quot;Drainage Areas&quot; attribute table and manually enter the Project\_ID, StudyArea\_ID and ConnectionPoint attributes for the new drainage area. For example, data entered for two drainage areas with a Project\_ID (or work order number) of 40000 should look like this:
 
 | Project\_ID | StudyArea\_ID | ConnectionPoint |
 | --- | --- | --- |
-| 40000 | 40000\_01 | 11
-# th
- St from Market to Filbert |
-| 40000 | 40000\_02 | 11
-# th
- St from Filbert to Arch |
+| 40000 | 40000\_01 | 11 St from Market to Filbert |
+| 40000 | 40000\_02 | 11 St from Filbert to Arch |
 
-1.
-  1. Repeat steps &quot;a&quot; through &quot;f&quot; for each study area.
-  2. In the Editor Toolbar dropdown menu, select &quot;Save Edits&quot;, then &quot;Stop Editing&quot;.
+    7. Repeat steps &quot;a&quot; through &quot;f&quot; for each study area.
+    8. In the Editor Toolbar dropdown menu, select &quot;Save Edits&quot;, then &quot;Stop Editing&quot;.
 
 1. **Add the study sewers (and their contributing sewers) from the &quot;Waste Water Gravity Mains&quot; layer to the &quot;Studied Sewers&quot; Layer**
   1. **Associate study sewers to the Drainage Areas.**
